@@ -3,6 +3,16 @@
 ![wizard](images/wizard.svg)
 
 ---
+# about:me
+
+substack
+
+Oakland, California
+
+working on:
+[omega projects](https://github.com/substack/omega-projects/issues)
+
+---
 # how I survived murphy's law
 
 "Anything that can go wrong, will go wrong."
@@ -86,18 +96,50 @@ WHAT COULD POSSIBLY GO WRONG
 ---
 # svg crash course
 
-``` html
+``` svg
 <svg xmlns="http://www.w3.org/2000/svg">...</svg>
 ```
 
 ---
 # svg
 
-``` html
+``` svg
 <svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="300" cy="200" r="5" fill="purple" />
+  <circle cx="300" cy="200" r="100" fill="purple" />
 </svg>
 ```
+
+<script>
+function hue2rgb(p, q, t){
+    if(t < 0) t += 1;
+    if(t > 1) t -= 1;
+    if(t < 1/6) return p + (q - p) * 6 * t;
+    if(t < 1/2) return q;
+    if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+}
+function hsl2rgb(h, s, l) {
+    var r,g,b;
+    h = parseInt(h,10)/360;
+    s = parseInt(s,10)/100;
+    l = parseInt(l,10)/100;
+    if ( s === 0 ) {
+        r = g = b = l;
+    } else {
+        var q = l < 0.5 ?  l * (1 + s) : l+s - l*s;
+        var p = 2*l - q;
+        r = hue2rgb(p,q,h+1/3);
+        g = hue2rgb(p,q,h);
+        b = hue2rgb(p,q,h - 1/3);
+    }
+    r = Math.round(r*255);
+    g = Math.round(g*255);
+    b = Math.round(b*255);
+    return 'rgb('+r+','+g+','+b+')';
+}
+</script>
+
+![circle](images/circle.svg)
 
 ---
 # attributes
@@ -107,7 +149,7 @@ WHAT COULD POSSIBLY GO WRONG
 * `stroke-width
 
 ---
-``` html
+``` svg
 <circle cx="300" cy="200" r="5" fill="purple" />
 ```
 
@@ -115,22 +157,77 @@ WHAT COULD POSSIBLY GO WRONG
 * `cy` - center y coordinate
 * `r` - radius
 
+![circle](images/circle.svg)
+
 ---
 # `<rect>`
 
-``` html
+``` svg
+<rect x="1" y="1" width="998" height="298"
+  fill="orange" stroke-width="2" />
+```
+
+![rect](images/rect.svg)
+
+---
+# if you don't put the `/>`
+
+``` svg
 <rect x="1" y="1" width="998" height="298"
   fill="orange" stroke-width="2">
 ```
 
+aaaaaaaaaaaaaaaaaaaaaaaaa
+
+![rect](images/rect_fucked.svg)
+
+---
+# other things that will waste your time
+
+* if you don't put `xmlns` in the `<svg>` tag
+* blank image because your image is clipped
+* xml extremism
+
 ---
 # `<text>`
 
-``` html
+``` svg
 <text x="250" y="150" font-family="Verdana" font-size="55">
   whatever
 </text>
 ```
+
+<script>
+function hue2rgb(p, q, t){
+    if(t < 0) t += 1;
+    if(t > 1) t -= 1;
+    if(t < 1/6) return p + (q - p) * 6 * t;
+    if(t < 1/2) return q;
+    if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+}
+function hsl2rgb(h, s, l) {
+    var r,g,b;
+    h = parseInt(h,10)/360;
+    s = parseInt(s,10)/100;
+    l = parseInt(l,10)/100;
+    if ( s === 0 ) {
+        r = g = b = l;
+    } else {
+        var q = l < 0.5 ?  l * (1 + s) : l+s - l*s;
+        var p = 2*l - q;
+        r = hue2rgb(p,q,h+1/3);
+        g = hue2rgb(p,q,h);
+        b = hue2rgb(p,q,h - 1/3);
+    }
+    r = Math.round(r*255);
+    g = Math.round(g*255);
+    b = Math.round(b*255);
+    return 'rgb('+r+','+g+','+b+')';
+}
+</script>
+
+![text](images/text.svg)
 
 ---
 # transforms
@@ -147,35 +244,37 @@ Set the "transform" attribute to any of these:
 ---
 # translate
 
-``` html
-<svg viewbox="0 0 500 500" width="100%" height="100%">
-  <circle transform="translate(30,20)" cx="100" cy="200" r="20" />
+``` svg
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500">
+  <circle cx="300" cy="200" r="200" fill="cyan" />
+  <circle transform="translate(30,20)" cx="300" cy="200" r="200" fill="purple" />
 </svg>
 ```
 
-shifts the y down 30 units and the x right 20 units
+![translate](images/translate.svg)
 
 ---
 # scale
 
-``` html
-<svg viewbox="0 0 1000 1000" width="100%" height="100%">
-  <circle transform="scale(0.5,2)" cx="100" cy="200" r="100" />
+``` svg
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="700">
+  <circle transform="scale(0.5,2)" cx="100" cy="200" r="100" fill="red" />
 </svg>
 ```
 
-halves the radius along the x and doubles the radius along
-the y
+![scale](images/scale.svg)
 
 ---
 # rotate
 
-``` html
-<svg width="100%" height="100%" viewbox="0 0 1000 1000">
-<rect x="1" y="1" width="998" height="298"
+``` svg
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500">
+<rect x="200" y="1" width="400" height="200"
   fill="orange" stroke-width="2" transform="rotate(30)" />
 </svg>
 ```
+
+![rotate](images/rotate.svg)
 
 ---
 # `<g>`
@@ -190,10 +289,12 @@ transform on a `<g>` element.
 
 create a shape from a path string
 
-``` html
+``` svg
 <path d="M 100 100 L 300 100 L 200 300 z"
   fill="orange" stroke="black" stroke-width="3" />
 ```
+
+![path](images/path.svg)
 
 ---
 # path string syntax
@@ -220,18 +321,23 @@ Some others:
 
 create a closed shape from line segments
 
-``` html
-<polygon points="60,20 100,40 100,80 60,100 20,80 20,40" />
+``` svg
+<polygon points="60,20 100,40 100,80 60,100 20,80 20,40" fill="lime" />
 ```
+
+![polygon](images/polygon.svg)
 
 ---
 # `<polyline>`
 
 create an open shape from line segments
 
-``` html
-<polyline points="60,20 100,40 100,80 60,100 20,80 20,40" />
+``` svg
+<polyline points="60,20 100,40 100,80 60,100 20,80 20,40"
+  stroke="purple" fill="transparent" stroke-width="8px" />
 ```
+
+![polyline](images/polyline.svg)
 
 ---
 
@@ -293,7 +399,7 @@ svgs in an image program.
 
 This works to display an image:
 
-``` html
+``` svg
 <img src="cats.svg">
 ```
 
@@ -505,8 +611,38 @@ What if you could just draw your game?
 ---
 # wall street panic
 
-<a href="http://localhost:43545">http://localhost:43545</a>
+[wall st panic](http://localhost:43545)
 
 ![wallst](images/wallst.svg)
 
 ---
+# what about robots
+
+what IF
+
+---
+# some modules
+
+first, some modules:
+
+* svg-linearize
+* svg-line-segments
+* svg-create-element
+* abs-svg-path
+* parse-svg-path
+* simplify-geometry
+
+---
+# robot dinosaur
+
+[svg 2 inform](http://substack.neocities.org/svg2inform.html)
+
+![apatosaur](images/apatosaur.svg)
+
+---
+
+![robot drawing a dinosaur](https://www.youtube.com/watch?v=pY9v50FBd5E)
+
+---
+
+EOF
